@@ -8,14 +8,23 @@
       - Gradle -> Refresh All -> Refresh Dependency: Gradle会自动下载依赖包
       - Run as Application
 
+
+- Client: 客户端
+- Server: 服务端
+- 运行: 先Server，再Client	
 `gradle.buile` 文件：
 
 ```
 apply plugin: 'java'
 repositories { mavenCentral() }  
-dependencies { compile 'org.apache.thrift:libthrift:0.9.2'
+dependencies { compile 'org.apache.thrift:libthrift:0.9.3'
 			   compile  'org.slf4j:slf4j-log4j12:1.7.19'
 				compile  'log4j:log4j:1.2.17'
 				} 
 ```
 
+- 注意build.gradle文件 `compile`中  `org.apache.thrift:libthrift:0.9.3` 就是所需jar包
+	- 项目右键，点击 Gradle -> Refresh All
+	- 依赖包可网站 [mvnrepository](http://mvnrepository.com/),包括Maven和Gradle格式
+- gradle清除下载包
+ - 右键选择 Gradle -> Disable Dependency Manage
