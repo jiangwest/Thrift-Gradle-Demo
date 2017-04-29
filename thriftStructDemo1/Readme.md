@@ -231,6 +231,16 @@ Thrift结构
 	 - 常用协议
 	 	- TBinaryProtocol：定义了数据以二进制形式传输 -> 最简单+最常用
 		- TCompactProtocol：压缩二进制协议，与TBinaryProtocol相比，它会采用压缩算法对数据进行再压缩，减少实际传输数据量，提高传输效率	
+- TProcessor层: 定义处理业务逻辑，主要代码是`Iface`接口和`Processor`类
+	- `Iface`接口: 生成用户定义IDL文件中的`service`方法的具体语言接口，如Java/Python
+		- 服务器端需要定义相应的实现类去 `implements **.Iface` 接口，完成服务的业务逻辑
+	- `Processor`类：定义一`processMap`
+- Server层: Thrift框架中最高层，创建并管理下面的三层，同时提供了客户端调用时的线程调度逻辑 
+　　     - 服务层基类是`TServer`，相当于一**容器**，里面包含`TProcessor，TTransport，TProtocol`，并实现对它们的管理和调度
+	- TServer实现方式: 
+		- TSimpleServer: 单线程阻塞式IO模型
+		- TThreadSelectorServer: 多线程非阻塞式IO模型
+
 
 ```java
 import java.io.*;
