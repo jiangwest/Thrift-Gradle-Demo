@@ -1,3 +1,12 @@
+## Thrift 复杂示例
+
+- aim: 测试 thrift `List/Map`
+	- ref to [对Thrift的一点点理解](http://blog.csdn.net/dlutbrucezhang/article/details/48897923)
+	- 改进: 
+		- Server: 不采用`TSimpleServer`模式
+	 
+
+
 - Thrift: 基于C/S架构的RPC通信框架，具有高效序列化机制
 	- 定义接口描述文件 `.thrift`
 	- 使用*thrift*工具利用IDL生成目标代码
@@ -212,6 +221,17 @@ public class SchoolMock {
 
 启动服务
 
+Thrift结构
+
+- TTransport层  : 设置传输通道 -> TCP、Http等协议实现
+	- 包含各种socket调用方法，如`open，close，read，write`
+	- 两类实现方式: 阻塞， 非阻塞
+- TProtocol层 : 使用二进制的传输协议
+	 - 定义数据传输形式，例如编码
+	 - 常用协议
+	 	- TBinaryProtocol：定义了数据以二进制形式传输 -> 最简单+最常用
+		- TCompactProtocol：压缩二进制协议，与TBinaryProtocol相比，它会采用压缩算法对数据进行再压缩，减少实际传输数据量，提高传输效率	
+
 ```java
 import java.io.*;
 import org.apache.thrift.*;
@@ -251,6 +271,13 @@ public class StudentThriftServer {
 
 
 `StudentThriftClient.java`: 客户端
+
+*  transport
+*  protocol 
+*  client : 创建客户端
+*  transport.open() : 打开传输通道
+*  transport.close() : 关闭传输通道
+
 
 ```java
 import java.io.*;
