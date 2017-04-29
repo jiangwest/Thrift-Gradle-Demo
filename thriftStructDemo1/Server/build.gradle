@@ -1,0 +1,29 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+mainClassName = 'StudentThriftServer'     // main() ��·��
+
+repositories { mavenCentral() }
+
+dependencies {
+    compile 'org.apache.thrift:libthrift:0.10.0'
+    compile  'org.slf4j:slf4j-log4j12:1.7.19'
+    compile  'log4j:log4j:1.2.17'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir '.' // ָ��Դ��Ŀ¼
+
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'StudentThriftServer'
+    }
+    baseName = 'gs-gradle'
+}
